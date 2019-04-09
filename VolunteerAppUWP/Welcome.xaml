@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="VolunteerAppUWP.Welcome"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VolunteerAppUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    
+    Height="1030"
+    Width="1920"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="#FF4B4E57">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="999*" MaxWidth="700" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="161" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Welcome!" FontSize="50" FontFamily="Century Gothic" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="61" Width="250" />
+        <TextBlock Text="To Navigate, use the sidebar on the left accessible from the hamburger button." Grid.Column="1" Grid.Row="1" FontSize="40" FontFamily="Century Gothic" VerticalAlignment="Top" TextWrapping="Wrap" Padding="20" />
+    </Grid>
+</Page>

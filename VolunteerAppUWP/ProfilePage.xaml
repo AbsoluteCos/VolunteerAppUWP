@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="VolunteerAppUWP.ProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VolunteerAppUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="CadetBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Rectangle Fill="Blue" /> <!--code to get background image off of server-->
+        <!--this is where the user stats go-->
+        <StackPanel Grid.Row="1" Padding="100">
+            <TextBlock Text="Total Hours: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" />
+
+        </StackPanel>
+        <!--some kind of graph-->
+        <!-- button area -->
+        <Grid x:Name="grBtn" Grid.Column="1" Grid.Row="1" Padding="150">
+            <Button x:Name="btnHours" Content="Add Hours" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="200" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="AddHours_Click" />
+            <Button x:Name="btnOut" Content="Sign Out" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="200" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="SignOut_Click" />
+        </Grid>
+    </Grid>
+</Page>

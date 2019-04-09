@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="VolunteerAppUWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VolunteerAppUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="rslide" Background="#FF03033E" HorizontalAlignment="Left" Width="300" Margin="-300,0,0,0" Canvas.ZIndex="2" Grid.Row="1">
+            <ListBox x:Name="lbMenu">
+                <!--move down a bit and have a user flair kind of thing on top-->
+                <ListBoxItem x:Name="lbiW" Content="Welcome" IsSelected="True" />
+                <ListBoxItem x:Name="lbiM" Content="Map" />
+                <ListBoxItem x:Name="lbiP" Content="Profile" />
+                <!--Add hours on right with charts and button for more details-->
+                <ListBoxItem x:Name="lbiC" Content="Community" />
+            </ListBox>
+        </Grid>
+        <Rectangle x:Name="rblur" VerticalAlignment="Bottom" Height="1030" Width="1920" Grid.Row="1" Canvas.ZIndex="-1" Fill="#9918181B" PointerPressed="Rblur_PointerPressed" />
+        <Rectangle x:Name="rtitle" Fill="#FF47288B" Height="50" Width="1920" />
+        <TextBlock x:Name="tbtitle" Text="Volunteer" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFCFD6EA" FontWeight="Bold" FontSize="36" />
+        <Button x:Name="btnHam" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" VerticalAlignment="Center" HorizontalAlignment="Left" Height="50" Width="50" FontSize="26" Click="BtnHam_Click" />
+        <Frame x:Name="frmain" Grid.Row="1" Height="1030" Width="1920" Background="#FF353D63" />
+    </Grid>
+</Page>
