@@ -11,7 +11,7 @@ namespace VolunteerAppUWP
 {
     public static class JSONImplement
     {
-        public static async Task<List<VOpp>> getOppurtunities(CancellationToken ct)
+        public static async Task<VOpp> getOppurtunities(CancellationToken ct)
         {
             using (HttpClient hc = new HttpClient())
             using (HttpRequestMessage hrm = new HttpRequestMessage(HttpMethod.Get, "https://api.betterplace.org/de/api_v4/projects.json?facets=completed%3Afalse"))
@@ -19,7 +19,7 @@ namespace VolunteerAppUWP
             {
                 response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<VOpp>>(content);
+                return JsonConvert.DeserializeObject<VOpp>(content);
             }
         }
     }

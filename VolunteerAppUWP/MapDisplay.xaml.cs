@@ -34,42 +34,24 @@ namespace VolunteerAppUWP
             GMapsUWP.Map.MapControlHelper.UseGoogleMaps(mMain);
             InitializeComponent();
 
-            List<MapElement> MyLandmarks = new List<MapElement>();
-            Geopoint gp = new Geopoint(new BasicGeoposition { Latitude = 47.620, Longitude = -122.349 });
-            var test = new MapIcon
-            {
-                Location = gp,
-                NormalizedAnchorPoint = new Point(.5, 1),
-                ZIndex = 0,
-                Title = "Space Needle"
-            };
-            MyLandmarks.Add(test);
-            var LandmarksLayer = new MapElementsLayer
-            {
-                ZIndex = 1,
-                MapElements = MyLandmarks
-            };
-            mMain.Layers.Add(LandmarksLayer);
-            mMain.Center = gp;
-            mMain.ZoomLevel = 14;
             DisplayMapData();
         }
 
         private async void DisplayMapData()
         {
             CancellationTokenSource cts = new CancellationTokenSource(); // can use this to stop the method after a time
-            List<VOpp> points = await JSONImplement.getOppurtunities(cts.Token);
+            VOpp points = await JSONImplement.getOppurtunities(cts.Token);
             List<MapElement> VolunteerLocations = new List<MapElement>();
 
-            foreach (VOpp v in points)
+            foreach (Data d in points.data)
             {
-                Geopoint gp = new Geopoint(new BasicGeoposition { Latitude = v.Latitude, Longitude = v.Longitude });
+                Geopoint gp = new Geopoint(new BasicGeoposition { Latitude = d.latitude, Longitude = d.longitude });
                 var xy = new MapIcon
                 {
                     Location = gp,
                     NormalizedAnchorPoint = new Point(.5, 1),
                     ZIndex = 0,
-                    Title = v.Title
+                    Title = d.title
                 };
                 VolunteerLocations.Add(xy);
             }
@@ -80,6 +62,11 @@ namespace VolunteerAppUWP
                 MapElements = VolunteerLocations
             };
             mMain.Layers.Add(LocLayer);
+        }
+
+        private string TranslateText()
+        {
+            return String.Empty;
         }
     }
 }

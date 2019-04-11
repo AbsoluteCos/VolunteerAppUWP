@@ -8,9 +8,14 @@ namespace VolunteerAppUWP
 {
     public class VOpp
     {
-        public string Title { get; set; }
-        public string Summary { get; set; }
-        public int Latitude { get; set; }
-        public int Longitude { get; set; }
+        public List<Data> data { get; set; }
+    }
+
+    public class Data
+    {
+        public string title { get; set; }
+        public string summary { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
     }
 }
