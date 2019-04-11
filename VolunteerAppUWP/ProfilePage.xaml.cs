@@ -35,17 +35,9 @@ namespace VolunteerAppUWP
             throw new NotImplementedException();
         }
 
-        private /*async*/ void SignOut_Click(object sender, RoutedEventArgs e)
+        private void SignOut_Click(object sender, RoutedEventArgs e)
         {
-            /*ContentDialog confirm = new ContentDialog();
-            confirm.Title = "Are you sure you want to sign out?";
-            confirm.
-            confirm.Commands.Add(new UICommand { Label = "No", Id = 0 });
-            confirm.Commands.Add(new UICommand { Label = "Yes", Id = 1 });
-            confirm.DefaultCommandIndex = 1; confirm.CancelCommandIndex = 0;
-            IUICommand val = await confirm.ShowAsync();*/
-            //if ((int)val.Id == 1)
-                throw new NotImplementedException(); //close window and open log in window
+            throw new NotImplementedException();
         }
     }
 }

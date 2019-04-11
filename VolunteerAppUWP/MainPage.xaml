@@ -23,10 +23,10 @@
                 <ListBoxItem x:Name="lbiC" Content="Community" />
             </ListBox>
         </Grid>
-        <Rectangle x:Name="rblur" VerticalAlignment="Bottom" Height="1030" Width="1920" Grid.Row="1" Canvas.ZIndex="-1" Fill="#9918181B" PointerPressed="Rblur_PointerPressed" />
-        <Rectangle x:Name="rtitle" Fill="#FF47288B" Height="50" Width="1920" />
+        <Rectangle x:Name="rblur" VerticalAlignment="Bottom" Grid.Row="1" Canvas.ZIndex="-1" Fill="#9918181B" PointerPressed="Rblur_PointerPressed" />
+        <Rectangle x:Name="rtitle" Fill="#FF47288B" />
         <TextBlock x:Name="tbtitle" Text="Volunteer" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFCFD6EA" FontWeight="Bold" FontSize="36" />
         <Button x:Name="btnHam" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" VerticalAlignment="Center" HorizontalAlignment="Left" Height="50" Width="50" FontSize="26" Click="BtnHam_Click" />
-        <Frame x:Name="frmain" Grid.Row="1" Height="1030" Width="1920" Background="#FF353D63" />
+        <Frame x:Name="frmain" Grid.Row="1" Background="#FF353D63" />
     </Grid>
 </Page>

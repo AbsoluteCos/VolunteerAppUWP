@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="CadetBlue">
+    <Grid Background="#FF3A4755">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="2*" />
@@ -27,8 +27,8 @@
         <!--some kind of graph-->
         <!-- button area -->
         <Grid x:Name="grBtn" Grid.Column="1" Grid.Row="1" Padding="150">
-            <Button x:Name="btnHours" Content="Add Hours" HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Width="200" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="AddHours_Click" />
-            <Button x:Name="btnOut" Content="Sign Out" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="200" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="SignOut_Click" />
+            <Button x:Name="btnHours" Content="Add Hours" HorizontalAlignment="Stretch" VerticalAlignment="Top" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="AddHours_Click" />
+            <Button x:Name="btnOut" Content="Sign Out" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="SignOut_Click" />
         </Grid>
     </Grid>
 </Page>

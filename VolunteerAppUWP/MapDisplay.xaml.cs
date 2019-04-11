@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -51,6 +52,34 @@ namespace VolunteerAppUWP
             mMain.Layers.Add(LandmarksLayer);
             mMain.Center = gp;
             mMain.ZoomLevel = 14;
+            DisplayMapData();
+        }
+
+        private async void DisplayMapData()
+        {
+            CancellationTokenSource cts = new CancellationTokenSource(); // can use this to stop the method after a time
+            List<VOpp> points = await JSONImplement.getOppurtunities(cts.Token);
+            List<MapElement> VolunteerLocations = new List<MapElement>();
+
+            foreach (VOpp v in points)
+            {
+                Geopoint gp = new Geopoint(new BasicGeoposition { Latitude = v.Latitude, Longitude = v.Longitude });
+                var xy = new MapIcon
+                {
+                    Location = gp,
+                    NormalizedAnchorPoint = new Point(.5, 1),
+                    ZIndex = 0,
+                    Title = v.Title
+                };
+                VolunteerLocations.Add(xy);
+            }
+
+            var LocLayer = new MapElementsLayer
+            {
+                ZIndex = 1,
+                MapElements = VolunteerLocations
+            };
+            mMain.Layers.Add(LocLayer);
         }
     }
 }
