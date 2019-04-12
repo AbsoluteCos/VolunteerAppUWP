@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -7,6 +8,7 @@ using System.Threading;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -28,6 +30,8 @@ namespace VolunteerAppUWP
     /// </summary>
     public sealed partial class MapDisplay : Page
     {
+        VOpp points;
+
         public MapDisplay()
         {
             GMapsUWP.Initializer.Initialize("AIzaSyBxO61LSkP3OSzjXIG6J5vJC9ziC7tFYzA", "en-US");
@@ -40,7 +44,7 @@ namespace VolunteerAppUWP
         private async void DisplayMapData()
         {
             CancellationTokenSource cts = new CancellationTokenSource(); // can use this to stop the method after a time
-            VOpp points = await JSONImplement.getOppurtunities(cts.Token);
+            points = await JSONImplement.getOppurtunities(cts.Token);
             List<MapElement> VolunteerLocations = new List<MapElement>();
 
             foreach (Data d in points.data)
@@ -62,6 +66,34 @@ namespace VolunteerAppUWP
                 MapElements = VolunteerLocations
             };
             mMain.Layers.Add(LocLayer);
+            
+        }
+
+        private void Landmark_Click(MapControl sender, MapElementClickEventArgs mecea)
+        {
+            var elements = mecea.MapElements;
+            MapIcon element = mecea.MapElements.First<MapElement>() as MapIcon;
+            Debug.WriteLine(element.Title);
+            Data pnt = new Data();
+            foreach (Data d in points.data)
+            {
+                if (d.title == element.Title)
+                    pnt = d;
+            }
+            if (pnt == null)
+                return;
+            DisplayData(pnt.title, pnt.summary);
+        }
+
+        private async void DisplayData(string title, string description)
+        {
+            ContentDialog displayPoint = new ContentDialog
+            {
+                Title = title,
+                Content = description,
+                CloseButtonText = "Ok"
+            };
+            await displayPoint.ShowAsync();
         }
 
         private string TranslateText()
