@@ -27,9 +27,11 @@ namespace VolunteerAppUWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainPage()
+        User user;
+        public MainPage(User user)
         {
             InitializeComponent();
+            this.user = user;
             Window.Current.SetTitleBar(rtitle);
             frmain.Content = new Welcome();
             lbMenu.SelectionChanged += MenuSelect;
@@ -48,7 +50,7 @@ namespace VolunteerAppUWP
                     frmain.Content = new MapDisplay();
                     break;
                 case "lbiP":
-                    frmain.Content = new ProfilePage(Height, Width);
+                    frmain.Content = new ProfilePage(user);
                     break;
                 case "lbiC":
                     frmain.Content = new CommunityPage();

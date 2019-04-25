@@ -10,6 +10,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="ForestGreen">
-        <maps:MapControl x:Name="mMain" MapElementClick="Landmark_Click" />
+        <maps:MapControl x:Name="mMain" MapElementClick="Landmark_Click" MapServiceToken="z9neR07pgvaO7kRZ6oGL~TbxFIVd9KhMhQ0SaFykbZw~Au1-RV2s6y9RIqumOdekTpDoVJsJMtLVmzhDB52nXsDrf8WkoB0_Np6HNAyOKoI0" />
     </Grid>
 </Page>

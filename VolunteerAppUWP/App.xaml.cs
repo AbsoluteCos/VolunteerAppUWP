@@ -31,6 +31,7 @@ namespace VolunteerAppUWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            //z9neR07pgvaO7kRZ6oGL~TbxFIVd9KhMhQ0SaFykbZw~Au1-RV2s6y9RIqumOdekTpDoVJsJMtLVmzhDB52nXsDrf8WkoB0_Np6HNAyOKoI0
             GMapsUWP.Initializer.Initialize("AIzaSyBxO61LSkP3OSzjXIG6J5vJC9ziC7tFYzA", "en-US");
         }
 
@@ -71,7 +72,7 @@ namespace VolunteerAppUWP
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(LogIn), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();

@@ -3,32 +3,71 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:VolunteerAppUWP"
+    xmlns:Reports="using:Syncfusion.UI.Xaml.Reports"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:chart="using:Syncfusion.UI.Xaml.Charts"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="#FF3A4755">
+    <Grid x:Name="template" Background="#FF3A4755">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="Blue" /> <!--code to get background image off of server-->
+        <Grid x:Name="Photo" Background="Blue" PointerPressed="Photo_PointerPressed" />
+        <!--code to get background image off of server-->
         <!--this is where the user stats go-->
         <StackPanel Grid.Row="1" Padding="100">
-            <TextBlock Text="Total Hours: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" />
+            <TextBlock x:Name="tbHours" Text="Total Hours: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" />
+            <TextBlock x:Name="tbEvents" Text="Total Events: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
+            <TextBlock x:Name="tbYears" Text="Total Years Doing Service: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
 
         </StackPanel>
         <!--some kind of graph-->
+        <Grid Grid.Column="1" VerticalAlignment="Bottom" Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="January" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="0" />
+            <TextBlock Text="February" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="1"  />
+            <TextBlock Text="March" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="2"  />
+            <TextBlock Text="April" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="3"  />
+            <TextBlock Text="May" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="4"  />
+            <TextBlock Text="June" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="5"  />
+            <TextBlock Text="July" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="6"  />
+            <TextBlock Text="August" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="7"  />
+            <TextBlock Text="September" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="8"  />
+            <TextBlock Text="October" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="9"  />
+            <TextBlock Text="November" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="10"  />
+            <TextBlock Text="December" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Grid.Column="11"  />
+        </Grid>
         <!-- button area -->
-        <Grid x:Name="grBtn" Grid.Column="1" Grid.Row="1" Padding="150">
-            <Button x:Name="btnHours" Content="Add Hours" HorizontalAlignment="Stretch" VerticalAlignment="Top" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="AddHours_Click" />
-            <Button x:Name="btnOut" Content="Sign Out" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="SignOut_Click" />
+        <Grid x:Name="grBtn" Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="btnHours" Content="Add Hours" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="AddHours_Click" Margin="30,0,30,0" />
+            <Button x:Name="btnView" Grid.Row="1" Content="View Hours" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="ViewHours_Click" Margin="30,0,30,0" />
+            <Button x:Name="btnOut" Grid.Row="2" Content="Sign Out" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="SignOut_Click" Margin="30,0,30,0" />
         </Grid>
     </Grid>
 </Page>
