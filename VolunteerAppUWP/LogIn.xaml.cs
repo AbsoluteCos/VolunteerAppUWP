@@ -30,13 +30,13 @@ namespace VolunteerAppUWP
 
         private async void BtnLI_Click(object sender, RoutedEventArgs e)
         {
-            User user = DBConn.GetUser(tbUN.Text, tbPass.Text);
+            User user = DBConn.GetUser(tbUN.Text, tbPass.Password);
             if (user != null)
                 Window.Current.Content = new MainPage(user);
             else
             {
                 tbUN.Text = string.Empty;
-                tbPass.Text = string.Empty;
+                tbPass.Password = string.Empty;
                 MessageDialog md = new MessageDialog("Invalid Username or Password");
                 await md.ShowAsync();
             }

@@ -25,7 +25,7 @@
         <TextBlock Text="Username:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2" FontSize="25" />
         <TextBlock Text="Password:" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2" FontSize="25" Margin="0,75,0,0" />
         <TextBox x:Name="tbUN" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" Margin="0,6,20,0" />
-        <TextBox x:Name="tbPass" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" Margin="2,78,20,0" />
+        <PasswordBox x:Name="tbPass" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" Margin="2,78,20,0" />
         <Button x:Name="btnLI" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Log In" FontSize="25" Margin="0,154,20,0" Click="BtnLI_Click" />
     </Grid>
 </Page>

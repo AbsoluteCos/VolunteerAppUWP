@@ -92,8 +92,8 @@ namespace VolunteerAppUWP
                 {
                     foreach (ServiceHourImplementation shi in toImplement)
                     {
-                        Debug.WriteLine((Month)(shs.Date.Month + 1));
-                        if (shi.month == (Month)(shs.Date.Month + 1))
+                        Debug.WriteLine((Month)(shs.Date.Month - 1));
+                        if (shi.month == (Month)(shs.Date.Month - 1))
                         {
                             shi.hours += shs.Hours;
                             break;
@@ -150,7 +150,7 @@ namespace VolunteerAppUWP
         private void ViewHours_Click(object sender, RoutedEventArgs e)
         {
             //view all logged hours
-            throw new NotImplementedException();
+            Window.Current.Content = new ViewHours(user);
         }
 
         private void SignOut_Click(object sender, RoutedEventArgs e)

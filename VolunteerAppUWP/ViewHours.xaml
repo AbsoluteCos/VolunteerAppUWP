@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="VolunteerAppUWP.ViewHours"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VolunteerAppUWP"
+    xmlns:sync="using:Syncfusion.UI.Xaml.CellGrid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="gr" Background="DarkSlateGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Rectangle x:Name="rMenu" HorizontalAlignment="Stretch" />
+        <Button x:Name="btnBack" FontFamily="Segoe MDL2 Assets" Content="&#xE72B;" Height="50" Width="50" Click="BtnBack_Click" VerticalAlignment="Bottom" />
+        <TextBlock Text="View Hours" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" />
+        <Rectangle Fill="#FF3B5F5F" Grid.Row="1" Canvas.ZIndex="-1" />
+        <sync:SfCellGrid x:Name="sfcg" Background="#FF3B5F5F" ColumnCount="3" Grid.Row="1" Margin="50,0,0,0" />
+    </Grid>
+</Page>
