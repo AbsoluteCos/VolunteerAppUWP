@@ -12,8 +12,8 @@
 
     <Grid x:Name="template" Background="#FF3A4755">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*" />
             <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -23,12 +23,24 @@
         <Grid x:Name="Photo" Background="Blue" PointerPressed="Photo_PointerPressed" />
         <!--code to get background image off of server-->
         <!--this is where the user stats go-->
-        <StackPanel Grid.Row="1" Padding="100">
-            <TextBlock x:Name="tbHours" Text="Total Hours: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" />
-            <TextBlock x:Name="tbEvents" Text="Total Events: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
-            <TextBlock x:Name="tbYears" Text="Total Years Doing Service: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <TextBlock x:Name="tbHours" Text="Total Hours: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" />
+                <TextBlock x:Name="tbEvents" Text="Total Events: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
+                <TextBlock x:Name="tbYears" Text="Total Years Doing Service: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
 
-        </StackPanel>
+            </StackPanel>
+        </Grid>
         <!--some kind of graph-->
         <Grid Grid.Column="1" VerticalAlignment="Bottom" Height="50">
             <Grid.ColumnDefinitions>

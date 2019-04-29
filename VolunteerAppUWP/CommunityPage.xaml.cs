@@ -1,16 +1,19 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.UI.Animations;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -25,6 +28,18 @@ namespace VolunteerAppUWP
         public CommunityPage()
         {
             this.InitializeComponent();
+        }
+
+        private void LVI_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            ListViewItem lvi = (ListViewItem)sender;
+            lvi.Background = new SolidColorBrush(Color.FromArgb(255,139,143,165));
+        }
+
+        private void LVI_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            ListViewItem lvi = (ListViewItem)sender;
+            lvi.Background = new SolidColorBrush(Color.FromArgb(255, 74, 75, 81));
         }
     }
 }
