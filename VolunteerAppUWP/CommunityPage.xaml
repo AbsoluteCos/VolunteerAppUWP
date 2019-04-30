@@ -45,7 +45,7 @@
             <TextBox Margin="10" PlaceholderText="Title..." PlaceholderForeground="#FF4A4B51" FontWeight="Bold" />
             <!--add an area for text editing buttons-->
             <TextBox Grid.Row="1" Margin="10" PlaceholderText="Say Something..." TextWrapping="Wrap" PlaceholderForeground="#FF4A4B51" FontWeight="Bold" />
-            <!--area to upload photos+other stuff-->
+            <!--area to upload photos+tags-->
             <Button Content="Post" FontSize="20" Foreground="Black" HorizontalAlignment="Stretch" Grid.Row="3" />
         </Grid>
     </Grid>

@@ -60,33 +60,36 @@ namespace VolunteerAppUWP
             }
 
             // loop through and add data points from each event
-            List<Data> toReturn = new List<Data>();
+            List<Data> toReturn = new List<Data>(); // <-------------- change size to links.Length
             HtmlWeb web = new HtmlWeb();
-
-            foreach (string link in links)
-            {
-                HtmlDocument doc = await web.LoadFromWebAsync(link);
-                var addressList = doc.DocumentNode.SelectNodes("//span[@class='black1']").ToList(); // address should be first
-                var titleList = doc.DocumentNode.SelectNodes("//a[@href='javascript:void(0)']").ToList(); // title = title.First().InnerText;
-                var descList = doc.DocumentNode.SelectNodes("//p").ToList();
-                string addressText = addressList.First().InnerText;
-                string titleText = titleList.First().InnerText;
-                string descText = string.Empty;
-                foreach (HtmlNode hn in descList)
-                {
-                    if (hn.InnerText != string.Empty)
-                    {
-                        if (hn.InnerText == "&nbsp;") descText += "\n";
-                        else descText += hn.InnerText;
-                    }
-                }
-                Geopoint addr = getLocationFromAddress(addressText);
-                Debug.WriteLine(addr.Position.Latitude + " " + addr.Position.Longitude);
-                toReturn.Add(new Data { title = titleText,
-                                             summary = descText,
-                                             latitude = addr.Position.Latitude,
-                                             longitude = addr.Position.Longitude });
-            }
+			
+			try
+			{
+				foreach (string link in links)
+				{
+					HtmlDocument doc = await web.LoadFromWebAsync(link);
+					var addressList = doc.DocumentNode.SelectNodes("//span[@class='black1']").ToList(); // address should be first
+					var titleList = doc.DocumentNode.SelectNodes("//a[@href='javascript:void(0)']").ToList(); // title = title.First().InnerText;
+					var descList = doc.DocumentNode.SelectNodes("//p").ToList();
+					string addressText = addressList.First().InnerText;
+					string titleText = titleList.First().InnerText;
+					string descText = string.Empty;
+					foreach (HtmlNode hn in descList)
+					{
+						if (hn.InnerText != string.Empty)
+						{
+							if (hn.InnerText == "&nbsp;") descText += "\n";
+							else descText += hn.InnerText;
+						}
+					}
+					Geopoint addr = getLocationFromAddress(addressText);
+					Debug.WriteLine(addr.Position.Latitude + " " + addr.Position.Longitude);
+					toReturn.Add(new Data { title = titleText,
+												 summary = descText,
+												 latitude = addr.Position.Latitude,
+												 longitude = addr.Position.Longitude });
+				}
+			} catch (Exception e) { Debug.WriteLine(e.ToString(); return toReturn; }
             Debug.WriteLine("end");
             return toReturn;
             

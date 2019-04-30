@@ -104,5 +104,14 @@ namespace VolunteerAppUWP
                 conn.Query($"update User_List set Photo = '{photo}' where UID = '{UID}'");
             }
         }
+		
+		public static List<Post> GetPosts(int begin, List<Tag> tags)
+		{
+			using(IDbConnection conn = new SqlConnection(connStr))
+			{
+				//change this to start at begin and select next 50 or so perhaps where id is > 0 < 50 if top is most recent, also where the items contain tags, doesn't have to be all though
+				return conn.Query<Post>("select * from Post_List").ToList();
+			}
+		}
     }
 }
