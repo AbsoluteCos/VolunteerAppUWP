@@ -31,6 +31,7 @@ namespace VolunteerAppUWP
     public sealed partial class MapDisplay : Page
     {
         VOpp points;
+        List<Data> morePoints;
 
         public MapDisplay()
         {
@@ -45,9 +46,26 @@ namespace VolunteerAppUWP
         {
             CancellationTokenSource cts = new CancellationTokenSource(); // can use this to stop the method after a time
             points = await JSONImplement.getOppurtunities(cts.Token);
+            morePoints = await JSONImplement.getRSSOppurtunities();
+
+            Debug.WriteLine(points.data.Count);
+
             List<MapElement> VolunteerLocations = new List<MapElement>();
 
             foreach (Data d in points.data)
+            {
+                Geopoint gp = new Geopoint(new BasicGeoposition { Latitude = d.latitude, Longitude = d.longitude });
+                var xy = new MapIcon
+                {
+                    Location = gp,
+                    NormalizedAnchorPoint = new Point(.5, 1),
+                    ZIndex = 0,
+                    Title = d.title
+                };
+                VolunteerLocations.Add(xy);
+            }
+
+            foreach (Data d in morePoints)
             {
                 Geopoint gp = new Geopoint(new BasicGeoposition { Latitude = d.latitude, Longitude = d.longitude });
                 var xy = new MapIcon
@@ -76,10 +94,11 @@ namespace VolunteerAppUWP
             Debug.WriteLine(element.Title);
             Data pnt = new Data();
             foreach (Data d in points.data)
-            {
                 if (d.title == element.Title)
                     pnt = d;
-            }
+            foreach (Data d in morePoints)
+                if (d.title == element.Title)
+                    pnt = d;
             if (pnt == null)
                 return;
             DisplayData(pnt.title, pnt.summary);
