@@ -11,12 +11,29 @@ namespace VolunteerAppUWP
 		public int ID { get; set; }
 		public int UID { get; set; }
 		public string Title { get; set; }
-		public string Content { get; set; }
-		public List<Tag> Tags { get; set; } // might have to use int list instead if the sql doesn't convert
+		public string Text { get; set; }
+		public string Tags { get; set; } // 10 character string that is 01s
+        public DateTime Posted { get; set; }
 	}
+
+    public class Comment
+    {
+        public int PID { get; set; }
+        public int UID { get; set; }
+        public string Content { get; set; }
+    }
 	
 	public enum Tag
 	{
-		//  List all the different tags here
-	};
+        HumanRights,
+        Animals,
+        ArtsandCulture,
+        ChildrenandYouth,
+        Education,
+        EldersandSeniorCitizens,
+        HealthandMedicine,
+        HomelessandHousing,
+        PeopleWithDisabilities,
+        Technology,
+    };
 }

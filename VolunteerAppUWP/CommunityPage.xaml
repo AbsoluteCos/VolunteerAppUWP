@@ -24,16 +24,21 @@
         <TextBlock Text="Create a Post" FontSize="36" Foreground="Black" HorizontalAlignment="Center" Grid.Column="2" />
         <!--cahntent-->
         <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto">
-            <ListView Padding="10,0,10,0">
-                <ListViewItem Content="Tag #1" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
-                <ListViewItem Content="Tag #1" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
-                <ListViewItem Content="Tag #1" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
-                <ListViewItem Content="Tag #1" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+            <ListView x:Name="lvTags" Padding="10,0,10,0" SelectionMode="Multiple" SelectionChanged="lvTags_SelectionChanged">
+                <ListViewItem x:Name="l1"  Content="Human Rights" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l2" Content="Animals" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l3" Content="Arts and Culture" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l4" Content="Children and Youth" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l5" Content="Education" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l6" Content="Elders and Senior Citizens" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l7" Content="Health and Medicine" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l8" Content="Homeless and Housing" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l9" Content="People With Disabilities" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                <ListViewItem x:Name="l10" Content="Technology" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
             </ListView>
         </ScrollViewer>
         <ScrollViewer Grid.Column="1" Grid.Row="1" VerticalScrollMode="Enabled">
-            <StackPanel Padding="10,0,10,0">
-            </StackPanel>
+            <StackPanel x:Name="spFeed" Padding="10,0,10,0" />
         </ScrollViewer>
         <Grid Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -42,11 +47,32 @@
                 <RowDefinition Height="140" />
                 <RowDefinition Height="70" />
             </Grid.RowDefinitions>
-            <TextBox Margin="10" PlaceholderText="Title..." PlaceholderForeground="#FF4A4B51" FontWeight="Bold" />
+            <TextBox x:Name="tbPostTitle" Margin="10" PlaceholderText="Title..." PlaceholderForeground="#FF4A4B51" FontWeight="Bold" />
             <!--add an area for text editing buttons-->
-            <TextBox Grid.Row="1" Margin="10" PlaceholderText="Say Something..." TextWrapping="Wrap" PlaceholderForeground="#FF4A4B51" FontWeight="Bold" />
+            <TextBox x:Name="tbPostText" Grid.Row="1" Margin="10" PlaceholderText="Say Something..." TextWrapping="Wrap" PlaceholderForeground="#FF4A4B51" FontWeight="Bold" />
             <!--area to upload photos+tags-->
-            <Button Content="Post" FontSize="20" Foreground="Black" HorizontalAlignment="Stretch" Grid.Row="3" />
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Button x:Name="btnTags" Content="Choose Tags..." FontSize="20" Foreground="Black" Click="BtnTags_Click" />
+                <TextBlock x:Name="tbNewTags" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" />
+            </StackPanel>
+            <Popup x:Name="popChooseTags" IsOpen="False">
+                <StackPanel Background="LightGray">
+                    <ListView x:Name="pvTags" SelectionMode="Multiple" SelectionChanged="lvTags_SelectionChanged">
+                        <ListViewItem x:Name="p1"  Content="Human Rights" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p2" Content="Animals" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p3" Content="Arts and Culture" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p4" Content="Children and Youth" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p5" Content="Education" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p6" Content="Elders and Senior Citizens" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p7" Content="Health and Medicine" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p8" Content="Homeless and Housing" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p9" Content="People With Disabilities" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                        <ListViewItem x:Name="p10" Content="Technology" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" PointerEntered="LVI_PointerEntered" PointerExited="LVI_PointerExited" />
+                    </ListView>
+                    <Button x:Name="btnSelectTags" Content="Confirm" FontWeight="Bold" Background="#FF4A4B51" Margin="0,10,0,0" HorizontalAlignment="Stretch" Click="BtnSelectTags_Click" />
+                </StackPanel>
+            </Popup>
+            <Button x:Name="btnPost" Content="Post" FontSize="20" Foreground="Black" HorizontalAlignment="Stretch" Grid.Row="3" Click="BtnPost_Click" />
         </Grid>
     </Grid>
 </Page>

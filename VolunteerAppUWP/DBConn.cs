@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,15 @@ namespace VolunteerAppUWP
                 {
                     return null;
                 }
+            }
+        }
+
+        public static User GetUser(int UID)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                List<User> curr = conn.Query<User>($"select * from User_List where UID = '{UID}'").ToList();
+                return curr.First();
             }
         }
 
@@ -107,11 +117,45 @@ namespace VolunteerAppUWP
 		
 		public static List<Post> GetPosts(int begin, List<Tag> tags)
 		{
-			using(IDbConnection conn = new SqlConnection(connStr))
+            string tagString = TagEnumToString(tags);
+            using (IDbConnection conn = new SqlConnection(connStr))
 			{
 				//change this to start at begin and select next 50 or so perhaps where id is > 0 < 50 if top is most recent, also where the items contain tags, doesn't have to be all though
-				return conn.Query<Post>("select * from Post_List").ToList();
+				List<Post> initialList = conn.Query<Post>($"select top 20 * from Post_List where ID >= '{begin}'").ToList();
+                List<Post> toReturn = new List<Post>();
+                bool add;
+                int i;
+                foreach (Post p in initialList)
+                {
+                    i = 0;
+                    add = true;
+                    foreach (char c in p.Tags)
+                    {
+                        if (tagString[i++] == '1' && c == '0')
+                        {
+                            add = false;
+                        }
+                    }
+                    if (add) toReturn.Add(p);
+                }
+                return toReturn;
 			}
 		}
+
+        public static void SubmitPost(int uid, string title, string text, List<Tag> tags)
+        {
+            using (IDbConnection conn = new SqlConnection(connStr))
+            {
+                conn.Query($"insert into Post_List (ID, UID, Title, Text, Tags, Posted) values ((select count(*) from Post_List),'{uid}','{title}','{text}','{TagEnumToString(tags)}','{DateTime.Now}')");
+            }
+        }
+
+        private static string TagEnumToString(List<Tag> tags)
+        {
+            StringBuilder toReturn = new StringBuilder("0000000000");
+            foreach (Tag t in tags)
+                toReturn[(int)t] = '1';
+            return toReturn.ToString();
+        }
     }
 }

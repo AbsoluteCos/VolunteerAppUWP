@@ -53,7 +53,7 @@ namespace VolunteerAppUWP
                     frmain.Content = new ProfilePage(user);
                     break;
                 case "lbiC":
-                    frmain.Content = new CommunityPage();
+                    frmain.Content = new CommunityPage(user);
                     break;
             }
 

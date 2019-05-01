@@ -136,6 +136,7 @@
     <Compile Include="MapDisplay.xaml.cs">
       <DependentUpon>MapDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Post.cs" />
     <Compile Include="ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
@@ -157,6 +158,7 @@
     <None Include="VolunteerAppUWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\githubfigurine-1024x539.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

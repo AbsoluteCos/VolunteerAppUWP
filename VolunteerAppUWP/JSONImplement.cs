@@ -32,18 +32,6 @@ namespace VolunteerAppUWP
             }
         }
 
-        /*public static async Task<VOpp> getMoreOppurtunities(CancellationToken ct)
-        {
-            using (HttpClient hc = new HttpClient())
-            using (HttpRequestMessage hrm = new HttpRequestMessage(HttpMethod.Get, "https://api.betterplace.org/de/api_v4/projects.json?around=America&facets=completed%3Afalse&order=rank%3ADESC&q=Skateistan&scope=location"))
-            using (var response = await hc.SendAsync(hrm, ct))
-            {
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<VOpp>(content);
-            }
-        }*/
-
         public static async Task<List<Data>> getRSSOppurtunities()
         {
             //get events from rss
@@ -55,7 +43,6 @@ namespace VolunteerAppUWP
             foreach (SyndicationItem item in feed.Items)
             {
                 string link = item.Links.First().Uri.AbsoluteUri;
-                Debug.WriteLine(link);
                 links.Add(link);
             }
 
@@ -63,7 +50,7 @@ namespace VolunteerAppUWP
             List<Data> toReturn = new List<Data>(); // <-------------- change size to links.Length
             HtmlWeb web = new HtmlWeb();
 			
-			try
+			try // change this to let the method return a Data and community calls it then plots it then calls it then plots it so on...
 			{
 				foreach (string link in links)
 				{
@@ -83,14 +70,12 @@ namespace VolunteerAppUWP
 						}
 					}
 					Geopoint addr = getLocationFromAddress(addressText);
-					Debug.WriteLine(addr.Position.Latitude + " " + addr.Position.Longitude);
 					toReturn.Add(new Data { title = titleText,
 												 summary = descText,
 												 latitude = addr.Position.Latitude,
 												 longitude = addr.Position.Longitude });
 				}
-			} catch (Exception e) { Debug.WriteLine(e.ToString(); return toReturn; }
-            Debug.WriteLine("end");
+			} catch (Exception e) { Debug.WriteLine(e.Message); return toReturn; }
             return toReturn;
             
         }
