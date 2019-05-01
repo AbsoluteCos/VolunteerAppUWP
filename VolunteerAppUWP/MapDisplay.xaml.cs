@@ -40,13 +40,43 @@ namespace VolunteerAppUWP
             InitializeComponent();
 
             DisplayMapData();
+            DisplayRSSData();
+        }
+
+        private async void DisplayRSSData()
+        {
+            List<MapElement> RSSVolunteerLocations = new List<MapElement>();
+            morePoints = new List<Data>();
+            List<string> links = JSONImplement.getRssLinks();
+            links.RemoveRange(100, links.Count - 100); // maybe make master method that seperate links into different lists and different async methods
+            foreach (string link in links)
+            {
+                Data x = await JSONImplement.getRSSOppurtunity(link);
+                morePoints.Add(x);
+                Geopoint gp = new Geopoint(new BasicGeoposition { Latitude = x.latitude, Longitude = x.longitude });
+                var xy = new MapIcon
+                {
+                    Location = gp,
+                    NormalizedAnchorPoint = new Point(.5, 1),
+                    ZIndex = 0,
+                    Title = x.title
+                };
+                RSSVolunteerLocations.Add(xy);
+            }
+            var LocLayer = new MapElementsLayer
+            {
+                ZIndex = 1,
+                MapElements = RSSVolunteerLocations
+            };
+            mMain.Layers.Add(LocLayer);
+            Debug.WriteLine("finish big rss boi");
         }
 
         private async void DisplayMapData()
         {
             CancellationTokenSource cts = new CancellationTokenSource(); // can use this to stop the method after a time
             points = await JSONImplement.getOppurtunities(cts.Token);
-            morePoints = await JSONImplement.getRSSOppurtunities();
+            //morePoints = await JSONImplement.getRSSOppurtunities();
 
             Debug.WriteLine(points.data.Count);
 
@@ -65,7 +95,7 @@ namespace VolunteerAppUWP
                 VolunteerLocations.Add(xy);
             }
 
-            foreach (Data d in morePoints)
+            /*foreach (Data d in morePoints)
             {
                 Geopoint gp = new Geopoint(new BasicGeoposition { Latitude = d.latitude, Longitude = d.longitude });
                 var xy = new MapIcon
@@ -76,7 +106,7 @@ namespace VolunteerAppUWP
                     Title = d.title
                 };
                 VolunteerLocations.Add(xy);
-            }
+            }*/
 
             var LocLayer = new MapElementsLayer
             {

@@ -87,7 +87,8 @@ namespace VolunteerAppUWP
                 container.Children.Add(userDisplay);
 
                 Image userImage = new Image();
-                userImage.Source = new BitmapImage(new Uri(this.BaseUri, Directory.GetCurrentDirectory() + @"\Assets\bet.png"));
+                try { userImage.Source = new BitmapImage(new Uri(this.BaseUri, Directory.GetCurrentDirectory() + $@"\Assets\{u.Photo}")); }
+                catch { userImage.Source = new BitmapImage(new Uri(this.BaseUri, Directory.GetCurrentDirectory() + @"\Assets\LockScreenLogo.scale-200.png")); }
                 userDisplay.Children.Add(userImage);
 
                 TextBlock userText = new TextBlock() { Text=u.Username };

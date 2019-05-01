@@ -32,9 +32,8 @@ namespace VolunteerAppUWP
             }
         }
 
-        public static async Task<List<Data>> getRSSOppurtunities()
+        public static List<string> getRssLinks()
         {
-            //get events from rss
             List<string> links = new List<string>();
             string url = "https://www.volunteer.gov/vg.xml";
             XmlReader reader = XmlReader.Create(url);
@@ -45,39 +44,36 @@ namespace VolunteerAppUWP
                 string link = item.Links.First().Uri.AbsoluteUri;
                 links.Add(link);
             }
+            return links;
+        }
 
-            // loop through and add data points from each event
-            List<Data> toReturn = new List<Data>(); // <-------------- change size to links.Length
+        public static async Task<Data> getRSSOppurtunity(string link)
+        {
             HtmlWeb web = new HtmlWeb();
 			
 			try // change this to let the method return a Data and community calls it then plots it then calls it then plots it so on...
 			{
-				foreach (string link in links)
+				HtmlDocument doc = await web.LoadFromWebAsync(link);
+				var addressList = doc.DocumentNode.SelectNodes("//span[@class='black1']").ToList(); // address should be first
+				var titleList = doc.DocumentNode.SelectNodes("//a[@href='javascript:void(0)']").ToList(); // title = title.First().InnerText;
+				var descList = doc.DocumentNode.SelectNodes("//p").ToList();
+				string addressText = addressList.First().InnerText;
+				string titleText = titleList.First().InnerText;
+				string descText = string.Empty;
+				foreach (HtmlNode hn in descList)
 				{
-					HtmlDocument doc = await web.LoadFromWebAsync(link);
-					var addressList = doc.DocumentNode.SelectNodes("//span[@class='black1']").ToList(); // address should be first
-					var titleList = doc.DocumentNode.SelectNodes("//a[@href='javascript:void(0)']").ToList(); // title = title.First().InnerText;
-					var descList = doc.DocumentNode.SelectNodes("//p").ToList();
-					string addressText = addressList.First().InnerText;
-					string titleText = titleList.First().InnerText;
-					string descText = string.Empty;
-					foreach (HtmlNode hn in descList)
+					if (hn.InnerText != string.Empty)
 					{
-						if (hn.InnerText != string.Empty)
-						{
-							if (hn.InnerText == "&nbsp;") descText += "\n";
-							else descText += hn.InnerText;
-						}
+						if (hn.InnerText == "&nbsp;") descText += "\n";
+						else descText += hn.InnerText;
 					}
-					Geopoint addr = getLocationFromAddress(addressText);
-					toReturn.Add(new Data { title = titleText,
-												 summary = descText,
-												 latitude = addr.Position.Latitude,
-												 longitude = addr.Position.Longitude });
 				}
-			} catch (Exception e) { Debug.WriteLine(e.Message); return toReturn; }
-            return toReturn;
-            
+				Geopoint addr = getLocationFromAddress(addressText);
+				return new Data { title = titleText,
+												summary = descText,
+												latitude = addr.Position.Latitude,
+												longitude = addr.Position.Longitude };
+			} catch (Exception e) { Debug.WriteLine(e.Message); return null; }
         }
 
         private static Geopoint getLocationFromAddress(string address)
