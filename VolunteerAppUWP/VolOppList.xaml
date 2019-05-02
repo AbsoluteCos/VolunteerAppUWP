@@ -19,6 +19,6 @@
             <TextBox x:Name="tbMiRad" Width="100" PlaceholderText="mi" Margin="0,0,10,0" />
             <Button x:Name="btnSearch" Content="Search" Click="BtnSearch_Click" />
         </StackPanel>
-        <sync:SfCellGrid Background="#FF3B5F5F" x:Name="sfcg" AllowColumnResize="True" ColumnCount="3" Grid.Row="1" Margin="50,0,50,0" />
+        <sync:SfCellGrid Background="#FF3B5F5F" x:Name="sfcg" AllowColumnResize="True" ColumnCount="4" Grid.Row="1" Margin="50,0,50,0" />
     </Grid>
 </Page>

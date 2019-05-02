@@ -35,7 +35,7 @@ namespace VolunteerAppUWP
             Window.Current.SetTitleBar(rtitle);
             frmain.Content = new Welcome(user);
             lbMenu.SelectionChanged += MenuSelect;
-            if (page == 1) { frmain.Content = new ProfilePage(user); lbMenu.SelectedItem = lbiP; }
+            if (page == 1) { frmain.Content = new ProfilePage(user); lbMenu.SelectedItem = lbiP; toggleMenu(); }
         }
 
         private void MenuSelect(object sender, SelectionChangedEventArgs e)

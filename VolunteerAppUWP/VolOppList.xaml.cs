@@ -34,7 +34,14 @@ namespace VolunteerAppUWP
             inittable();
         }
 
-        private async void inittable(double radius = 0)
+        private void inittable()
+        {
+            
+
+            addvalues();
+        }
+
+        private async void addvalues(double radius = 0)
         {
             List<string> links = JSONImplement.getRssLinks();
             links.RemoveRange(50, links.Count - 50);
@@ -43,28 +50,31 @@ namespace VolunteerAppUWP
             // add something here that puts a thing that says loading data...
             foreach (string link in links)
                 opp.Add(await JSONImplement.getRSSOppurtunity(link));
+            Geopoint xy = await JSONImplement.getCurrentLocation();
             if (radius != 0)
             {
-                Geopoint xy = await JSONImplement.getCurrentLocation();
                 List<int> toRemove = new List<int>();
                 int i = 0;
-                const double lengthAtEquator = 69.172;
-                double radLat = Math.Cos(xy.Position.Latitude * Math.PI / 180) * lengthAtEquator;
+                int removed = 0;
                 foreach (Data d in opp)
                 {
-                    double distance = Math.Sqrt(Math.Pow(d.latitude - xy.Position.Latitude, 2) * Math.Pow(d.longitude - xy.Position.Longitude, 2));
+                    double distance = JSONImplement.GetDistance(xy.Position.Latitude, xy.Position.Longitude, d.latitude, d.longitude);
                     Debug.WriteLine(distance);
-                    if (distance > radLat)
+                    if (distance > radius)
                     {
-                        toRemove.Add(i - toRemove.Count); // to adjust for more things dying
+                        Debug.WriteLine("REMOVING --------> " + distance + " at index - count ======= " + (i));
+                        toRemove.Add(i - removed++); // to adjust for more things dying
                     }
                     i++;
                 }
                 foreach (int f in toRemove)
+                {
                     opp.RemoveAt(f);
+                    Debug.WriteLine("REMOVING ACTUALLY ======= " + f);
+                }
             }
             Debug.WriteLine("got through loops");
-            sfcg.RowCount = opp.Count + 1;
+
             GridStyleInfo baseStyle = sfcg.Model.BaseStylesMap["custom"].StyleInfo;
             baseStyle.Background = new SolidColorBrush(Colors.Gray);
             baseStyle.HorizontalAlignment = HorizontalAlignment.Center;
@@ -81,6 +91,14 @@ namespace VolunteerAppUWP
             sfcg.Model[0, 1].BaseStyle = "custom";
             sfcg.Model[0, 2].CellValue = "Address";
             sfcg.Model[0, 2].BaseStyle = "custom";
+            sfcg.Model[0, 3].CellValue = "Distance to Current Location";
+            sfcg.Model[0, 3].BaseStyle = "custom";
+
+            if (sfcg.RowCount != 1) sfcg.Model.RemoveRows(1, sfcg.RowCount - 1);
+
+            sfcg.RowCount = opp.Count + 1;
+
+
             int row = 1;
             foreach (Data d in opp)
             {
@@ -88,8 +106,10 @@ namespace VolunteerAppUWP
                 sfcg.Model[row, 0].BaseStyle = "custom1";
                 sfcg.Model[row, 1].CellValue = d.summary;
                 sfcg.Model[row, 1].BaseStyle = "custom1";
-                sfcg.Model[row, 2].CellValue = d.latitude;
+                sfcg.Model[row, 2].CellValue = JSONImplement.GetAddress(d.latitude, d.longitude);
                 sfcg.Model[row, 2].BaseStyle = "custom1";
+                sfcg.Model[row, 3].CellValue = JSONImplement.GetDistance(xy.Position.Latitude, xy.Position.Longitude, d.latitude, d.longitude) + " mi";
+                sfcg.Model[row, 3].BaseStyle = "custom1";
                 row++;
             }
         }
@@ -101,7 +121,7 @@ namespace VolunteerAppUWP
                 double rad = 0;
                 if (double.TryParse(tbMiRad.Text, out rad))
                 {
-                    inittable(rad);
+                    addvalues(rad);
                 }
                 else
                 {

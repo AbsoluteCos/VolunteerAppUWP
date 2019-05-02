@@ -248,5 +248,33 @@ namespace VolunteerAppUWP
             bg.Longitude = double.Parse(longitude);
             return new Geopoint(bg);
         }
+
+        public static string GetAddress(double latitude, double longitude)
+        {
+            string url = $@"https://maps.google.com/maps/api/geocode/xml?latlng={latitude},{longitude}&key=AIzaSyBxO61LSkP3OSzjXIG6J5vJC9ziC7tFYzA&sensor=false";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(url);
+            XmlNode loc = doc.SelectSingleNode("//GeocodeResponse/result/formatted_address");
+            return loc.InnerText;
+        }
+
+        public static string GetAddress(Geopoint xy)
+        {
+            string url = $@"https://maps.google.com/maps/api/geocode/xml?latlng={xy.Position.Latitude},{xy.Position.Longitude}&key=AIzaSyBxO61LSkP3OSzjXIG6J5vJC9ziC7tFYzA&sensor=false";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(url);
+            XmlNode loc = doc.SelectSingleNode("//GeocodeResponse/result/formatted_address");
+            return loc.InnerText;
+        }
+
+        public static double GetDistance(double lat1, double lng1, double lat2, double lng2)
+        {
+            string url = $@"https://maps.googleapis.com/maps/api/distancematrix/xml?units=imperial&origins={lat1},{lng1}&destinations={lat2},{lng2}&key=AIzaSyBxO61LSkP3OSzjXIG6J5vJC9ziC7tFYzA";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(url);
+            XmlNode loc = doc.SelectSingleNode("//DistanceMatrixResponse/row/element/distance/text");
+            Debug.WriteLine(loc.InnerText);
+            return double.Parse(loc.InnerText.Remove(loc.InnerText.Count() - 3));
+        }
     }
 }

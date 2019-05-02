@@ -37,12 +37,16 @@ namespace VolunteerAppUWP
 
         private async void BtnSub_Click(object sender, RoutedEventArgs e)
         {
-            if (tbTit.Text != ""
-                && tbHr.Text != ""
-                && cdpDate.Date.HasValue)
+            double d = 0;
+            if (tbTit.Text != string.Empty
+                && tbHr.Text != string.Empty
+                && cdpDate.Date.HasValue
+                && cdpDate.Date.Value.Date <= DateTime.Now
+                && double.TryParse(tbHr.Text, out d)
+                && d > 0)
             {
-                DBConn.AddHours(user.UID, tbTit.Text, double.Parse(tbHr.Text), cdpDate.Date.Value.DateTime);
-                Window.Current.Content = new MainPage(user);
+                DBConn.AddHours(user.UID, tbTit.Text, d, cdpDate.Date.Value.DateTime);
+                Window.Current.Content = new MainPage(user, 1);
             }
             else
             {
