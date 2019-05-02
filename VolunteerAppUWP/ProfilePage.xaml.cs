@@ -170,7 +170,7 @@ namespace VolunteerAppUWP
             Debug.WriteLine(Directory.GetCurrentDirectory());
             StorageFolder sf = await StorageFolder.GetFolderFromPathAsync(Directory.GetCurrentDirectory() + @"\Assets");
             try { await x.CopyAsync(sf); } catch { }
-            DBConn.SetPhoto(user.UID, x.Name);
+            try { DBConn.SetPhoto(user.UID, x.Name); } catch { }
             initphoto();
         }
     }

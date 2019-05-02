@@ -146,6 +146,9 @@
     <Compile Include="ViewHours.xaml.cs">
       <DependentUpon>ViewHours.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VolOppList.xaml.cs">
+      <DependentUpon>VolOppList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VOpp.cs" />
     <Compile Include="Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
@@ -201,12 +204,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="VolOppList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Welcome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Chilkat.uwp">
+      <Version>9.5.0.77</Version>
+    </PackageReference>
     <PackageReference Include="Dapper">
       <Version>1.60.6</Version>
     </PackageReference>

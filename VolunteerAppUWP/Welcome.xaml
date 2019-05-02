@@ -6,22 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    
-    Height="1030"
-    Width="1920"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="#FF4B4E57">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="999*" MaxWidth="700" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="9*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="161" />
-            <RowDefinition />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
-        <TextBlock Text="Welcome!" FontSize="50" FontFamily="Century Gothic" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="61" Width="250" />
-        <TextBlock Text="To Navigate, use the sidebar on the left accessible from the hamburger button." Grid.Column="1" Grid.Row="1" FontSize="40" FontFamily="Century Gothic" VerticalAlignment="Top" TextWrapping="Wrap" Padding="20" />
+        <TextBlock x:Name="tbWelcome" Text="Welcome " FontSize="42" HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Column="1" FontWeight="Bold" />
+        <TextBlock FontSize="36" HorizontalAlignment="Left" Margin="0,100,0,0" Grid.Column="1" TextWrapping="Wrap">
+            Volunteer is an thing description to be updated at a later date this will wrap around a dynamic margin
+        </TextBlock>
+        <TextBlock FontSize="36" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="1" TextWrapping="Wrap">
+            To start, use the navigation menu whose button is located on the top left corner
+        </TextBlock>
     </Grid>
 </Page>

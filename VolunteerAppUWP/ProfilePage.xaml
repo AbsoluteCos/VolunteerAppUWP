@@ -35,9 +35,9 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="1" Grid.Row="1">
-                <TextBlock x:Name="tbHours" Text="Total Hours: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" />
-                <TextBlock x:Name="tbEvents" Text="Total Events: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
-                <TextBlock x:Name="tbYears" Text="Total Years Doing Service: " Foreground="#FF007E33" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
+                <TextBlock x:Name="tbHours" Text="Total Hours: " Foreground="Gray" FontSize="24" FontWeight="Bold" />
+                <TextBlock x:Name="tbEvents" Text="Total Events: " Foreground="Gray" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
+                <TextBlock x:Name="tbYears" Text="Total Years Doing Service: " Foreground="Gray" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" />
 
             </StackPanel>
         </Grid>
@@ -77,9 +77,9 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button x:Name="btnHours" Content="Add Hours" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="AddHours_Click" Margin="30,0,30,0" />
-            <Button x:Name="btnView" Grid.Row="1" Content="View Hours" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="ViewHours_Click" Margin="30,0,30,0" />
-            <Button x:Name="btnOut" Grid.Row="2" Content="Sign Out" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF835717" FontSize="24" FontWeight="Bold" Click="SignOut_Click" Margin="30,0,30,0" />
+            <Button x:Name="btnHours" Content="Add Hours" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF074F57" FontSize="24" FontWeight="Bold" Click="AddHours_Click" Margin="30,0,30,0" />
+            <Button x:Name="btnView" Grid.Row="1" Content="View Hours" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF074F57" FontSize="24" FontWeight="Bold" Click="ViewHours_Click" Margin="30,0,30,0" />
+            <Button x:Name="btnOut" Grid.Row="2" Content="Sign Out" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF074F57" FontSize="24" FontWeight="Bold" Click="SignOut_Click" Margin="30,0,30,0" />
         </Grid>
     </Grid>
 </Page>

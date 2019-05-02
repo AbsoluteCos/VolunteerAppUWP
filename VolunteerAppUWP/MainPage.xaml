@@ -16,11 +16,12 @@
         <Grid x:Name="rslide" Background="#FF03033E" HorizontalAlignment="Left" Width="300" Margin="-300,0,0,0" Canvas.ZIndex="2" Grid.Row="1">
             <ListBox x:Name="lbMenu">
                 <!--move down a bit and have a user flair kind of thing on top-->
-                <ListBoxItem x:Name="lbiW" Content="Welcome" IsSelected="True" />
-                <ListBoxItem x:Name="lbiM" Content="Map" />
+                <ListBoxItem x:Name="lbiW" Content="Home" IsSelected="True" />
                 <ListBoxItem x:Name="lbiP" Content="Profile" />
                 <!--Add hours on right with charts and button for more details-->
-                <ListBoxItem x:Name="lbiC" Content="Community" />
+                <ListBoxItem x:Name="lbiC" Content="Forum" />
+                <ListBoxItem x:Name="lbiM" Content="Find Volunteering by Location" />
+                <ListBoxItem x:Name="lbiL" Content="Find Volunteering by Preference" />
             </ListBox>
         </Grid>
         <Rectangle x:Name="rblur" VerticalAlignment="Bottom" Grid.Row="1" Canvas.ZIndex="-1" Fill="#9918181B" PointerPressed="Rblur_PointerPressed" />

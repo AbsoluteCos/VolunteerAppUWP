@@ -120,8 +120,10 @@ namespace VolunteerAppUWP
             string tagString = TagEnumToString(tags);
             using (IDbConnection conn = new SqlConnection(connStr))
 			{
-				//change this to start at begin and select next 50 or so perhaps where id is > 0 < 50 if top is most recent, also where the items contain tags, doesn't have to be all though
-				List<Post> initialList = conn.Query<Post>($"select top 20 * from Post_List where ID >= '{begin}'").ToList();
+                //change this to start at begin and select next 50 or so perhaps where id is > 0 < 50 if top is most recent, also where the items contain tags, doesn't have to be all though
+                int tableSize = conn.Query<int>("select count(*) from Post_List").First();
+                Debug.WriteLine(tableSize);
+				List<Post> initialList = conn.Query<Post>($"select top 20 * from Post_List where ID <= ({tableSize - begin}) order by ID desc").ToList();
                 List<Post> toReturn = new List<Post>();
                 bool add;
                 int i;

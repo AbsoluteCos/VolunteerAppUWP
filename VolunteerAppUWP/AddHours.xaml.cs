@@ -32,7 +32,7 @@ namespace VolunteerAppUWP
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            Window.Current.Content = new MainPage(user);
+            Window.Current.Content = new MainPage(user, 1);
         }
 
         private async void BtnSub_Click(object sender, RoutedEventArgs e)

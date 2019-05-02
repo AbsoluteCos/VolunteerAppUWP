@@ -51,10 +51,14 @@
             <!--add an area for text editing buttons-->
             <TextBox x:Name="tbPostText" Grid.Row="1" Margin="10" PlaceholderText="Say Something..." TextWrapping="Wrap" PlaceholderForeground="#FF4B4E57" FontWeight="Bold" />
             <!--area to upload photos+tags-->
-            <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="175" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
                 <Button x:Name="btnTags" Content="Choose Tags..." FontSize="20" Foreground="Black" Click="BtnTags_Click" />
-                <TextBlock x:Name="tbNewTags" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" />
-            </StackPanel>
+                <TextBlock x:Name="tbNewTags" TextWrapping="Wrap" Height="140" VerticalAlignment="Top" Foreground="Black" Grid.Column="1" />
+            </Grid>
             <Popup x:Name="popChooseTags" IsOpen="False">
                 <StackPanel Background="#FF4B4E57">
                     <ListView x:Name="pvTags" SelectionMode="Multiple" SelectionChanged="lvTags_SelectionChanged">

@@ -73,7 +73,10 @@ namespace VolunteerAppUWP
                 
                 //create xaml elements to represent posts
                 Grid container = new Grid();
-                container.Background = new SolidColorBrush(Colors.Red);
+                var uiSettings = new Windows.UI.ViewManagement.UISettings();
+                var color = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Background);
+                color.A = 100;
+                container.Background = new SolidColorBrush(color);
                 container.Margin = new Thickness(0, 10, 0, 0);
                 RowDefinition rd50 = new RowDefinition(); rd50.Height = new GridLength(50);
                 RowDefinition rd502 = new RowDefinition(); rd502.Height = new GridLength(50);
@@ -134,6 +137,10 @@ namespace VolunteerAppUWP
                 DBConn.SubmitPost(user.UID, tbPostTitle.Text, tbPostText.Text, tagsSelected);
                 spFeed.Children.Clear();
                 ShowPosts(RetrievePosts(0));
+                tbPostTitle.Text = string.Empty;
+                tbPostText.Text = string.Empty;
+                pvTags.SelectedItem = null;
+                tbNewTags.Text = string.Empty;
             }
         }
 

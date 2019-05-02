@@ -28,13 +28,14 @@ namespace VolunteerAppUWP
     public sealed partial class MainPage : Page
     {
         User user;
-        public MainPage(User user)
+        public MainPage(User user, int page = 0)
         {
             InitializeComponent();
             this.user = user;
             Window.Current.SetTitleBar(rtitle);
-            frmain.Content = new Welcome();
+            frmain.Content = new Welcome(user);
             lbMenu.SelectionChanged += MenuSelect;
+            if (page == 1) { frmain.Content = new ProfilePage(user); lbMenu.SelectedItem = lbiP; }
         }
 
         private void MenuSelect(object sender, SelectionChangedEventArgs e)
@@ -44,10 +45,13 @@ namespace VolunteerAppUWP
             switch (lbi.Name)
             {
                 case "lbiW":
-                    frmain.Content = new Welcome();
+                    frmain.Content = new Welcome(user);
                     break;
                 case "lbiM":
                     frmain.Content = new MapDisplay();
+                    break;
+                case "lbiL":
+                    frmain.Content = new VolOppList();
                     break;
                 case "lbiP":
                     frmain.Content = new ProfilePage(user);

@@ -41,6 +41,29 @@ namespace VolunteerAppUWP
 
             DisplayMapData();
             DisplayRSSData();
+            ZoomToLocation();
+        }
+
+        private async void ZoomToLocation()
+        {
+            Geopoint gp = await JSONImplement.getCurrentLocation();
+            List<MapElement> mapElements = new List<MapElement>();
+            var xy = new MapIcon
+            {
+                Location = gp,
+                NormalizedAnchorPoint = new Point(.5,1),
+                ZIndex = 0,
+                Title = "Current Location"
+            };
+            mapElements.Add(xy);
+            var LocLayer = new MapElementsLayer
+            {
+                ZIndex = 1,
+                MapElements = mapElements
+            };
+            mMain.Layers.Add(LocLayer);
+            mMain.ZoomLevel = 12;
+            mMain.Center = gp;
         }
 
         private async void DisplayRSSData()
@@ -129,6 +152,11 @@ namespace VolunteerAppUWP
             foreach (Data d in morePoints)
                 if (d.title == element.Title)
                     pnt = d;
+            if (element.Title == "Current Location")
+            {
+                DisplayData("This is Your Current Location", "");
+                return;
+            }
             if (pnt == null)
                 return;
             DisplayData(pnt.title, pnt.summary);
